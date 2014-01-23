@@ -1,0 +1,10 @@
+<h1>Home#new</h1>
+<p>Find me in app/views/home/new.html.erb</p>
+<div id="matrix_div">
+  <%= render "matrix" %>
+</div>
+<%= button_to "New Board", action: "new" %>
+<%= form_for(@game_master,url: game_masters_step_path, remote: true) do |f| %>
+    <%= f.hidden_field :board %>
+    <%= f.submit "Yolo", class: "btn btn-large btn-primary" %>
+<% end %>
