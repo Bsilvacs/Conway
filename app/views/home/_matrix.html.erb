@@ -1,5 +1,22 @@
-<% @game_master.board.to_a.each do |item| -%>
-    <div class="row">
-      <div class="span2"><%=item%></div>
-    </div>
-<% end -%>
+<table class="table table-bordered table-small">
+    <tbody>
+        <% @game_master.board.to_a.each do |row| -%>
+            <tr>
+            <% row.each do |col| %>
+                  <% if col == 1 %>
+                      <td class="column-small"><i class="fa fa-circle-o"></i></td>
+                  <% else %>
+                    <td class="column-small"><i class="fa fa-circle-o fa-white"></i></td>
+                <% end %>
+              <% end %>
+            </tr>
+        <% end -%>
+    </tbody>
+</table>
+<div id="btn-panel">
+  <%= button_to "New Board", {action: "new", controller: "home"}, {class: 'btn btn-primary btn-block btn-margin'} %>
+  <%= form_for(@game_master,url: game_masters_step_path, remote: true) do |f| %>
+      <%= f.hidden_field :board %>
+      <%= f.submit "Step", class: "btn btn-primary btn-block" %>
+  <% end %>
+</div>

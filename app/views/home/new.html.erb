@@ -1,10 +1,24 @@
-<h1>Home#new</h1>
-<p>Find me in app/views/home/new.html.erb</p>
-<div id="matrix_div">
-  <%= render "matrix" %>
+<div class="row">
+  <aside class="col-md-4">
+    <section>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Rules</h3>
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li>Any live cell with fewer than two live neighbours dies, as if caused by under-population.</li>
+            <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+            <li>Any live cell with more than three live neighbours dies, as if by overcrowding.</li>
+            <li>Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </aside>
+  <div class="col-md-8">
+    <div id="matrix_div">
+      <%= render "matrix" %>
+    </div>
+  </div>
 </div>
-<%= button_to "New Board", action: "new" %>
-<%= form_for(@game_master,url: game_masters_step_path, remote: true) do |f| %>
-    <%= f.hidden_field :board %>
-    <%= f.submit "Yolo", class: "btn btn-large btn-primary" %>
-<% end %>

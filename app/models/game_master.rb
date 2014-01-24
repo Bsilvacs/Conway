@@ -14,12 +14,7 @@ class GameMaster
     end
   end
 
-  DefaultBoard = [
-      [0,0,0,0],
-      [0,0,0,0],
-      [0,0,0,0],
-      [0,0,0,0]]
-
+  #NOTE TO SELF: eval is NOT safe for inputs.
   def board=(attr)
     if attr.is_a?(String)
       @board = eval attr
@@ -39,12 +34,12 @@ class GameMaster
   private
 
   def get_new_board
-    Matrix.build(4,4) { |row, col| rand (0..1)}
+    Matrix.build(20,20) { |row, col|  [0,0,0,0,0,1].sample}
   end
 
   def evaluate_rules
     #First, lets get the alive neighbors for each position
-    newBoard = Matrix.zero(4)
+    newBoard = Matrix.zero(20)
     self.board.each_with_index do |value, row, col|
       aliveNeighbors = 0
       #Neighbor 1
@@ -100,7 +95,7 @@ class GameMaster
       case
         when aliveNeighbors < 2 && self.board.[](row,col) == 1
           newCell = 0
-        when aliveNeighbors >= 2 && self.board.[](row,col) == 1
+        when (aliveNeighbors == 2 || aliveNeighbors == 3) && self.board.[](row,col) == 1
           newCell = 1
         when aliveNeighbors > 3 && self.board.[](row,col) == 1
           newCell = 0
