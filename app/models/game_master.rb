@@ -20,6 +20,14 @@ class GameMaster
       [0,0,0,0],
       [0,0,0,0]]
 
+  def board=(attr)
+    if attr.is_a?(String)
+      @board = eval attr
+    else
+      @board = attr
+    end
+  end
+
   def persisted?
     false
   end
